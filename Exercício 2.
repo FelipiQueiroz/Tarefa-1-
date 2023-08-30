@@ -1,0 +1,115 @@
+import java.util.Scanner;
+
+public class Aluno {
+    private String Ra;
+    private String Nome;
+    private float AC1;
+    private float AC2;
+    private float AG;
+    private float AF;
+
+    public void setRA(String ra) {
+        this.Ra = ra;
+    }
+
+    public String getRA() {
+        return this.Ra;
+    }
+
+    public void setNome(String nome) {
+        this.Nome = nome;
+    }
+
+    public String getNome() {
+        return this.Nome;
+    }
+
+    public void setAC1(float ac1) {
+        this.AC1 = ac1;
+    }
+
+    public float getAC1() {
+        return this.AC1;
+    }
+
+    public void setAC2(float ac2) {
+        this.AC2 = ac2;
+    }
+
+    public float getAC2() {
+        return this.AC2;
+    }
+
+    public void setAG(float ag) {
+        this.AG = ag;
+    }
+
+    public float getAG() {
+        return this.AG;
+    }
+
+    public void setAF(float af) {
+        this.AF = af;
+    }
+
+    public float getAF() {
+        return this.AF;
+    }
+
+    public float calcularMedia() {
+        return (this.AC1 + this.AC2 + this.AG + this.AF) / 4.0f;
+    }
+
+    public String verificarAprovacao() {
+        if (calcularMedia() >= 5.0f) {
+            return "Aprovado";
+        } else {
+            return "Reprovado";
+        }
+    }
+
+    public String imprimir() {
+        return "RA: " + this.Ra + "\nNome: " + this.Nome + "\nAC1: " + this.AC1 + "\nAC2: " + this.AC2 + "\nAG: " + this.AG + "\nAF: " + this.AF + "\nMédia: " + calcularMedia() + "\nSituação: " + verificarAprovacao();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Aluno aluno = new Aluno();
+        int opcao = 0;
+
+        while (opcao != 3) {
+            System.out.println("Menu:");
+            System.out.println("1 – Criar Aluno");
+            System.out.println("2 – Mostrar Aluno");
+            System.out.println("3 – Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite o RA do aluno: ");
+                    aluno.setRA(scanner.next());
+                    System.out.print("Digite o nome do aluno: ");
+                    aluno.setNome(scanner.next());
+                    System.out.print("Digite a nota da AC1 do aluno: ");
+                    aluno.setAC1(scanner.nextFloat());
+                    System.out.print("Digite a nota da AC2 do aluno: ");
+                    aluno.setAC2(scanner.nextFloat());
+                    System.out.print("Digite a nota da AG do aluno: ");
+                    aluno.setAG(scanner.nextFloat());
+                    System.out.print("Digite a nota da AF do aluno: ");
+                    aluno.setAF(scanner.nextFloat());
+                    break;
+                case 2:
+                    System.out.println(aluno.imprimir());
+                    break;
+                case 3:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+       
+        scanner.close();
+    }
+}
