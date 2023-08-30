@@ -1,0 +1,139 @@
+import java.util.Scanner;
+
+public class Funcionario {
+    private int Cracha;
+    private String Nome;
+    private char TipoVinculo;
+    private float ValorHora;
+    private float QtdeHora;
+    private float Salario;
+    private float ValorDesconto;
+
+    public void setCracha(int cracha) {
+        this.Cracha = cracha;
+    }
+
+    public int getCracha() {
+        return this.Cracha;
+    }
+
+    public void setNome(String nome) {
+        this.Nome = nome;
+    }
+
+    public String getNome() {
+        return this.Nome;
+    }
+
+    public void setTipoVinculo(char tipoVinculo) {
+        this.TipoVinculo = tipoVinculo;
+    }
+
+    public char getTipoVinculo() {
+        return this.TipoVinculo;
+    }
+
+    public void setValorHora(float valorHora) {
+        this.ValorHora = valorHora;
+    }
+
+    public float getValorHora() {
+        return this.ValorHora;
+    }
+
+    public void setQtdeHora(float qtdeHora) {
+        this.QtdeHora = qtdeHora;
+    }
+
+    public float getQtdeHora() {
+        return this.QtdeHora;
+    }
+
+    public void setSalario(float salario) {
+        this.Salario = salario;
+    }
+
+    public float getSalario() {
+        return this.Salario;
+    }
+
+    public void setValorDesconto(float valorDesconto) {
+        this.ValorDesconto = valorDesconto;
+    }
+
+    public float getValorDesconto() {
+        return this.ValorDesconto;
+    }
+
+    public float calcularValorSalario() {
+        if (this.TipoVinculo == 'H') {
+            return (this.ValorHora * this.QtdeHora) - this.ValorDesconto;
+        } else if (this.TipoVinculo == 'M') {
+            return this.Salario - this.ValorDesconto;
+        } else {
+            return 0.0f;
+        }
+    }
+
+    public String imprimir() {
+        return "Crachá: " + this.Cracha + "\nNome: " + this.Nome + "\nTipo de Vínculo: " + (this.TipoVinculo == 'H' ? "Horista" : "Mensalista") + "\nSalário: R$ " + calcularValorSalario();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Funcionario funcionario = new Funcionario();
+        int opcao = 0;
+
+        while (opcao != 4) {
+            System.out.println("Menu:");
+            System.out.println("1 – Criar Funcionário");
+            System.out.println("2 – Mostrar Folha de Pagamento");
+            System.out.println("3 – Alterar remuneração");
+            System.out.println("4 – Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Digite o crachá do funcionário: ");
+                    funcionario.setCracha(scanner.nextInt());
+                    System.out.print("Digite o nome do funcionário: ");
+                    funcionario.setNome(scanner.next());
+                    System.out.print("Digite o tipo de vínculo do funcionário (H para horista ou M para mensalista): ");
+                    funcionario.setTipoVinculo(scanner.next().charAt(0));
+                    if (funcionario.getTipoVinculo() == 'H') {
+                        System.out.print("Digite o valor da hora do funcionário: ");
+                        funcionario.setValorHora(scanner.nextFloat());
+                        System.out.print("Digite a quantidade de horas trabalhadas pelo funcionário: ");
+                        funcionario.setQtdeHora(scanner.nextFloat());
+                    } else if (funcionario.getTipoVinculo() == 'M') {
+                        System.out.print("Digite o salário do funcionário: ");
+                        funcionario.setSalario(scanner.nextFloat());
+                    }
+                    System.out.print("Digite o valor do desconto do salário do funcionário: ");
+                    funcionario.setValorDesconto(scanner.nextFloat());
+                    break;
+                case 2:
+                    System.out.println(funcionario.imprimir());
+                    break;
+                case 3:
+                    if (funcionario.getTipoVinculo() == 'H') {
+                        System.out.print("Digite o novo valor da hora do funcionário: ");
+                        funcionario.setValorHora(scanner.nextFloat());
+                        System.out.print("Digite a nova quantidade de horas trabalhadas pelo funcionário: ");
+                        funcionario.setQtdeHora(scanner.nextFloat());
+                    } else if (funcionario.getTipoVinculo() == 'M') {
+                        System.out.print("Digite o novo salário do funcionário: ");
+                        funcionario.setSalario(scanner.nextFloat());
+                    }
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+       
+        scanner.close();
+    }
+}
